@@ -1,41 +1,48 @@
 {% comment %}
 
-	This snippet gives you a grid layout for each search result.
+  This snippet gives you a grid layout for each search result.
 
-	It is encouraged to only use this approach for product results,
-	as page results don't look great in a grid without a featured image.
+  It is encouraged to only use this approach for product results,
+  as page results don't look great in a grid without a featured image.
 
-	To use this grid layout, change the grid_results variable
-	in search.liquid to true.
+  To use this grid layout, change the grid_results variable
+  in search.liquid to true.
 
 {% endcomment %}
 
-<div class="grid-item large--one-third medium-down--one-half search-result">
+{% comment %}
+  Set the default grid_item_width if no variable is set
+{% endcomment %}
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
 
-	{% if item.featured_image %}
+<div class="grid-item search-result {{ grid_item_width }}">
 
-		<a href="{{ item.url }}" title="{{ item.title | escape }}">
-			{{ item.featured_image.src | product_img_url: 'medium' | img_tag: item.featured_image.alt }}
-		</a>
+  {% if item.featured_image %}
 
-	{% endif %}
+    <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+      {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+    </a>
 
-		<h5>{{ item.title | link_to: item.url }}</h5>
+  {% endif %}
 
-		<h6>
-			{% if item.compare_at_price > item.price %}
-				<span class="on-sale" itemprop="price">
-					{{ item.price | money }}
-				</span>
-				<small>
-					Compare at:
-					{{ item.compare_at_price_max | money }}
-				</small>
-			{% else %}
-				<span itemprop="price">
-					{{ item.price | money }}
-				</span>
-			{% endif %}
-		</h6>
+    <h5>{{ item.title | link_to: item.url }}</h5>
+
+    <h6>
+      {% if item.compare_at_price > item.price %}
+        <span class="on-sale" itemprop="price">
+          {{ item.price | money }}
+        </span>
+        <small>
+          Compare at:
+          {{ item.compare_at_price_max | money }}
+        </small>
+      {% else %}
+        <span itemprop="price">
+          {{ item.price | money }}
+        </span>
+      {% endif %}
+    </h6>
 
 </div>

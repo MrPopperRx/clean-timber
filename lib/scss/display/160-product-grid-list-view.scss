@@ -1,6 +1,6 @@
-// ==============================================================================
-// #Product Grid and List Views
-// ==============================================================================
+/*============================================================================
+  #Product Grid and List Views
+==============================================================================*/
 .sold-out {
 
 }
@@ -9,19 +9,17 @@
 
 }
 
-.product-list-thumb {
-	display: block;
-	float: left;
-	margin-right: $gutter;
-	margin-bottom: $gutter;
+.product-grid-item {
+  display: block;
+  text-decoration: none;
 }
 
 .product-grid-image {
-	display: block;
-	margin: 0 auto;
+  display: block;
+  margin: 0 auto $gutter/2;
 
-	img {
-		display: block;
-		margin: 0 auto;
-	}
+  img {
+    display: block;
+    margin: 0 auto;
+  }
 }

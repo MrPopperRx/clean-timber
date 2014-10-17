@@ -1,28 +1,35 @@
-// ==============================================================================
-// #Product Page
-// ==============================================================================
-.product-price {
-	font-weight: bold;
+/*============================================================================
+  #Product Page
+==============================================================================*/
+.product-variants {
+  display: none;
+
+  .no-js & {
+    display: block;
+  }
 }
 
-.product-variants {
-	display: none;
-
-	.no-js & {
-		display: block;
-	}
+@include at-query($min, $large) {
+  .selector-wrapper,
+  .product-variants {
+    select {
+      max-width: 40%;
+    }
+  }
 }
 
 .product-photo-container {
-	margin-bottom: $gutter;
+  margin-bottom: $gutter;
 }
 
 .product-photo-container,
 .product-photo-thumbs {
-	a, img {
-		display: block;
-	}
-	li {
-		margin-bottom: $gutter;
-	}
+  a, img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  li {
+    margin-bottom: $gutter;
+  }
 }

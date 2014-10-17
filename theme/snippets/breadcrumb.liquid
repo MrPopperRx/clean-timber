@@ -1,52 +1,62 @@
 {% comment %}
-	Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+  Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
 {% endcomment %}
 {% unless template == 'index' or template == 'cart' %}
-<div class="breadcrumb">
-	<a href="/" title="Back to the frontpage">Home</a>
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Back to the frontpage">Home</a>
 
-	{% if template contains 'product' %}
+  {% if template contains 'product' %}
 
-		{% if collection %}
-			<span>&raquo;</span>
-			{% if collection.handle %}
-				 {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
-				 {{ collection.title | link_to: url }}
-			{% endif %}
-		{% endif %}
-		<span>&raquo;</span>
-		<span>{{ product.title }}</span>
+    {% if collection %}
+      <span aria-hidden="true">&rsaquo;</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ product.title }}</span>
 
-	{% elsif template contains 'collection' and collection.handle %}
+  {% elsif template contains 'collection' and collection.handle %}
 
-		{% if current_tags %}
-			<span>&raquo;</span>
-			{% capture url %}/collections/{{ collection.handle }}{% endcapture %}
-			{{ collection.title | link_to: url }}
-			<span>&raquo;</span>
-			<span>{{ current_tags.first }}</span>
-		{% else %}
-			<span>&raquo;</span>
-			<span>{{ collection.title }}</span>
-		{% endif %}
+    <span aria-hidden="true">&rsaquo;</span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span aria-hidden="true">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
 
-	{% elsif template == 'article' %}
+  {% elsif template == 'blog' %}
 
-		<span>&raquo;</span>
-		{{ blog.title | link_to: blog.url }}
-		<span>&raquo;</span>
-		<span>{{ article.title }}</span>
+    <span aria-hidden="true">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
 
-	{% elsif template contains 'page' %}
+  {% elsif template == 'article' %}
 
-	 <span>&raquo;</span>
-	 <span>{{ page.title }}</span>
+    <span aria-hidden="true">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ article.title }}</span>
 
-	{% else %}
+  {% elsif template contains 'page' %}
 
-	 <span>&raquo;</span>
-	 <span>{{ page_title }}</span>
+   <span aria-hidden="true">&rsaquo;</span>
+   <span>{{ page.title }}</span>
 
-	{% endif %}
-</div>
+  {% else %}
+
+   <span aria-hidden="true">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
 {% endunless %}

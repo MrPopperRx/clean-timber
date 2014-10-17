@@ -1,17 +1,22 @@
-// ==============================================================================
-// #Tables
-// ==============================================================================
+/*============================================================================
+  #Tables
+==============================================================================*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 table.full {
-	width: 100%;
-	margin-bottom: 1em;
+  width: 100%;
+  margin-bottom: 1em;
 }
 
 th {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 th, td {
-	text-align: left;
-	padding: $gutter/2;
-	border: 1px solid $borderColor;
+  text-align: left;
+  padding: $gutter/2;
+  border: 1px solid $colorBorder;
 }

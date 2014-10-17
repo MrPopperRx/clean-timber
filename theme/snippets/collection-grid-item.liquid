@@ -1,28 +1,35 @@
 {% comment %}
 
-	This snippet is used to showcase each collection during the loop,
-	'for product in collection.products' in list-collections.liquid.
+  This snippet is used to showcase each collection during the loop,
+  'for product in collection.products' in list-collections.liquid.
 
 {% endcomment %}
 
-<div class="grid-item medium--one-half large--one-third text-center">
+{% comment %}
+  Set the default collection_item_width if no variable is set
+{% endcomment %}
+{% unless collection_item_width %}
+  {% assign collection_item_width = 'medium--one-half large--one-third' %}
+{% endunless %}
 
-	{% comment %}
-		Use capture to put the collection title in a variable that is used in liquid filters
-	{% endcomment %}
-	{% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+<div class="grid-item {{collection_item_width}} text-center">
 
-	<a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">
-		{% if collection.image %}
-			{{ collection.image.src | collection_img_url: 'large' | img_tag: collection_title }}
-		{% else %}
-			{{ collection.products.first.featured_image | product_img_url: 'large' | img_tag: collection_title }}
-		{% endif %}
-	</a>
+  {% comment %}
+    Use capture to put the collection title in a variable that is used in liquid filters
+  {% endcomment %}
+  {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
-	<h3 class="h5">
-		<a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">{{ collection.title }}</a>
-		<small>({{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'item', 'items' }})</small>
-	</h3>
+  <a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">
+    {% if collection.image %}
+      {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+    {% else %}
+      {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+    {% endif %}
+  </a>
+
+  <a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">{{ collection.title }}</a>
+  <p>
+    ({{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'item', 'items' }})
+  </p>
 
 </div>
