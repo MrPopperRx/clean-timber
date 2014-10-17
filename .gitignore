@@ -9,3 +9,4 @@ node_modules
 .idea
 theme/assets/shop.js.liquid
 theme/assets/style.scss.liquid
+theme/config.yml
