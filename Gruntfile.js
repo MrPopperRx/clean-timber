@@ -13,7 +13,7 @@ module.exports = function (grunt) {[
 		concat: { //CONCATENATING SCSS FILES
 			options: {},
 			dev: {
-				src: ['lib/scss/setup/*.scss', 'lib/scss/display/*.scss', 'lib/scss/custom/*.scss'],
+				src: ['source-assets/scss/setup/*.scss', 'source-assets/scss/timber/*.scss', 'source-assets/scss/sections/*.scss'],
 				dest: 'theme/assets/styles.scss.liquid'
 			},
 		},
@@ -24,7 +24,7 @@ module.exports = function (grunt) {[
 					report: 'min',
 				},
 				files: {
-					'theme/assets/shop.js.liquid': ['lib/js/libraries/*.js', 'lib/js/*.js'],
+					'theme/assets/shop.js.liquid': ['source-assets/js/libraries/*.js', 'source-assets/js/*.js'],
 				},
 			},
 		},
