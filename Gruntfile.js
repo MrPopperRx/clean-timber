@@ -44,7 +44,7 @@ module.exports = function (grunt) {[
 			},
 		},
 
-		copy: { //MOVE IMAGES AND SOURCE ASSETS TO ASSET FOLDER
+		copy: { //MOVE IMAGES AND FONTS ASSETS TO ASSET FOLDER
 			images: {
 				files: [{
 					expand: true,
@@ -54,11 +54,11 @@ module.exports = function (grunt) {[
 					filter: 'isFile'
 				}],
 			},
-			assets: {
+			fonts: {
 				files: [{
 					expand: true,
 					flatten: true,
-					src: ['source-assets/**', '!source-assets/images/**/*'],
+					src: ['source-assets/fonts/*.*'],
 					dest: 'theme/assets/',
 					filter: 'isFile'
 				}],
@@ -71,19 +71,19 @@ module.exports = function (grunt) {[
 
 		watch: { //WATCH FOR CHANGES
 			scss: {
-				files: ['lib/scss/setup/*.scss', 'lib/scss/display/*.scss', 'lib/scss/custom/*.scss'],
+				files: ['source-assets/scss/setup/*.scss', 'source-assets/scss/timber/*.scss', 'source-assets/scss/sections/*.scss'],
 				tasks: ['concat']
 			},
 			js: {
-				files: ['lib/js/libraries/*.js', 'lib/js/*.js'],
+				files: ['source-assets/js/libraries/*.js', 'source-assets/js/*.js'],
 				tasks: ['uglify']
 			},
 			images: {
 				files: ['source-assets/images/**/*.{png,jpg,gif}'],
 				tasks: ['newer:imagemin', 'newer:copy:images', 'clean']
 			},
-			assets: {
-				files: ['source-assets/**/*.*', '!source-assets/images/**/*.*'],
+			fonts: {
+				files: ['source-assets/fonts/*.*'],
 				tasks: ['newer:copy:assets']
 			},
 		},
